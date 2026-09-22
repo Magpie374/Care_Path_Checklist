@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <!-- Helps the layout work correctly on phones and tablets. -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="theme-color" content="#f1f7f6">
+  <title>Ankle Check-In</title>
+
+  <!-- Connects this HTML file to the separate CSS file. -->
+  <link rel="stylesheet" href="style.css">
+
+  <!--
+    Connects this HTML file to the separate JavaScript file.
+    "defer" waits until the HTML has loaded before running the script.
+  -->
+  <script src="script.js" defer></script>
+</head>
+
+<body>
+  <main class="app">
+    <!-- =========================
+         PROGRESS INDICATOR
+         ========================= -->
+
+    <div class="progress-area">
+      <div class="progress-label">
+        <p class="app-title">Ankle Check-In</p>
+        <span id="screen-status">Step 1 of 5</span>
+      </div>
+
+      <div
+        id="progress-track"
+        class="progress-track"
+        role="progressbar"
+        aria-label="Checklist progress"
+        aria-valuemin="1"
+        aria-valuemax="5"
+        aria-valuenow="1"
+      >
+        <div id="progress-bar" class="progress-bar"></div>
+      </div>
+    </div>
+
+    <!-- =========================
+         SCREEN 1: START
+         ========================= -->
+
+    <section class="screen" data-screen="0">
+      <p class="eyebrow">A quick, private check-in</p>
+      <h1 tabindex="-1">Hurt your ankle?</h1>
+
+      <p class="intro-text">
+        This short checklist can help you pause, notice what is happening,
+        and organize what you may want to tell a trusted adult.
+      </p>
+
+      <p class="notice">
+        This is educational and is not medical advice or a diagnosis.
+      </p>
+
+      <p class="time-note">About 1 minute · No information is saved</p>
+
+      <button id="start-button" class="primary-button" type="button">
+        Start the Checklist
+      </button>
+    </section>
+
+    <!-- =========================
+         SCREEN 2: WALKING QUESTION
+         ========================= -->
+
+    <section class="screen" data-screen="1" hidden>
+      <p class="context-label">Injured ankle check-in</p>
+      <h2 id="walking-question" tabindex="-1">Based on what you have already done since hurting your ankle, how has it affected your usual ability to take a few steps?</h2>
+
+      <p class="question-help">
+        Choose the closest answer. Do not stand or walk just to answer this question.
+      </p>
+
+      <div class="choice-list" role="radiogroup" aria-labelledby="walking-question">
+        <button
+          class="choice-button"
+          role="radio"
+          type="button"
+          data-question="walking"
+          data-value="easy"
+          data-next-screen="2"
+          aria-checked="false"
+          tabindex="0"
+        >
+          I took a few steps about as I usually do
+        </button>
+
+        <button
+          class="choice-button"
+          role="radio"
+          type="button"
+          data-question="walking"
+          data-value="hard"
+          data-next-screen="2"
+          aria-checked="false"
+          tabindex="-1"
+        >
+          I took a few steps, but with a new limp or support
+        </button>
+
+        <button
+          class="choice-button"
+          role="radio"
+          type="button"
+          data-question="walking"
+          data-value="none"
+          data-next-screen="2"
+          aria-checked="false"
+          tabindex="-1"
+        >
+          I could not take a few steps
+        </button>
+
+        <button
+          class="choice-button"
+          role="radio"
+          type="button"
+          data-question="walking"
+          data-value="unknown"
+          data-next-screen="2"
+          aria-checked="false"
+          tabindex="-1"
+        >
+          I have not tried, or I cannot assess this safely
+        </button>
+      </div>
+
+      <div class="navigation">
+        <button
+          class="secondary-button back-button"
+          type="button"
+          data-back-screen="0"
+        >
+          Back
+        </button>
+        <button class="primary-button continue-button" type="button" data-continue-screen="2" disabled>
+          Continue
+        </button>
+      </div>
+    </section>
+
+    <!-- =========================
+         SCREEN 3: VISIBLE CHANGES
+         ========================= -->
+
+    <section class="screen" data-screen="2" hidden>
+      <p class="context-label">Injured ankle check-in</p>
+      <h2 id="appearance-question" tabindex="-1">What visible changes do you notice?</h2>
+
+      <p class="question-help">
+        You do not need to decide what the changes mean. Just choose what you
+        can observe.
+      </p>
+
+      <div class="choice-list" role="radiogroup" aria-labelledby="appearance-question">
+        <button
+          class="choice-button"
+          role="radio"
+          type="button"
+          data-question="appearance"
+          data-value="little"
+          data-next-screen="3"
+          aria-checked="false"
+          tabindex="0"
+        >
+          Little or no visible change
+        </button>
+
+        <button
+          class="choice-button"
+          role="radio"
+          type="button"
+          data-question="appearance"
+          data-value="some"
+          data-next-screen="3"
+          aria-checked="false"
+          tabindex="-1"
+        >
+          Some swelling or bruising
+        </button>
+
+        <button
+          class="choice-button"
+          role="radio"
+          type="button"
+          data-question="appearance"
+          data-value="major"
+          data-next-screen="3"
+          aria-checked="false"
+          tabindex="-1"
+        >
+          It looks very different or is changing quickly
+        </button>
+      </div>
+
+      <div class="navigation">
+        <button
+          class="secondary-button back-button"
+          type="button"
+          data-back-screen="1"
+        >
+          Back
+        </button>
+        <button class="primary-button continue-button" type="button" data-continue-screen="3" disabled>
+          Continue
+        </button>
+      </div>
+    </section>
+
+    <!-- =========================
+         SCREEN 4: CHANGE OVER TIME
+         ========================= -->
+
+    <section class="screen" data-screen="3" hidden>
+      <p class="context-label">Injured ankle check-in</p>
+      <h2 id="change-question" tabindex="-1">How does it feel compared with when it happened?</h2>
+
+      <p class="question-help">
+        Pick the closest answer. It is also okay to choose “not sure.”
+      </p>
+
+      <div class="choice-list" role="radiogroup" aria-labelledby="change-question">
+        <button
+          class="choice-button"
+          role="radio"
+          type="button"
+          data-question="change"
+          data-value="same"
+          data-next-screen="4"
+          aria-checked="false"
+          tabindex="0"
+        >
+          About the same or less uncomfortable
+        </button>
+
+        <button
+          class="choice-button"
+          role="radio"
+          type="button"
+          data-question="change"
+          data-value="worse"
+          data-next-screen="4"
+          aria-checked="false"
+          tabindex="-1"
+        >
+          More uncomfortable than before
+        </button>
+
+        <button
+          class="choice-button"
+          role="radio"
+          type="button"
+          data-question="change"
+          data-value="unsure"
+          data-next-screen="4"
+          aria-checked="false"
+          tabindex="-1"
+        >
+          I am not sure
+        </button>
+      </div>
+
+      <div class="navigation">
+        <button
+          class="secondary-button back-button"
+          type="button"
+          data-back-screen="2"
+        >
+          Back
+        </button>
+        <button class="primary-button continue-button" type="button" data-continue-screen="4" disabled>
+          See my next step
+        </button>
+      </div>
+    </section>
+
+    <!-- =========================
+         SCREEN 5: RESULT
+         ========================= -->
+
+    <section
+      id="result-screen"
+      class="screen"
+      data-screen="4"
+      aria-live="polite"
+      hidden
+    >
+      <h2 tabindex="-1">Your next responsible step</h2>
+
+      <div class="result-section">
+        <h3>What you noticed</h3>
+        <ul id="answer-summary" class="answer-summary"></ul>
+      </div>
+
+      <div class="result-section">
+        <h3>What you could tell a trusted adult</h3>
+        <p id="adult-message"></p>
+      </div>
+
+      <div id="next-step-card" class="result-section result-highlight">
+        <h3>What to do next</h3>
+        <p id="next-step-message"></p>
+      </div>
+
+      <div class="result-section">
+        <h3>Important reminder</h3>
+
+        <p class="limit-reminder">
+          This checklist cannot tell what injury you have or decide what care
+          you need. A trusted adult or qualified healthcare professional
+          should help make that decision.
+        </p>
+      </div>
+
+      <div class="navigation">
+        <button
+          class="secondary-button back-button"
+          type="button"
+          data-back-screen="3"
+        >
+          Back
+        </button>
+
+        <button id="restart-button" class="primary-button" type="button">
+          Restart Checklist
+        </button>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

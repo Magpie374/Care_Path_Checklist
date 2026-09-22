@@ -1,0 +1,405 @@
+/* =========================
+   1. COLOR VARIABLES
+   ========================= */
+
+/*
+  Variables give colors readable names.
+  Changing one variable can update that color throughout the project.
+*/
+:root {
+  --page-background: #f1f7f6;
+  --card-background: #ffffff;
+  --primary-dark: #075c5b;
+  --primary: #087773;
+  --primary-hover: #056765;
+  --text-dark: #183333;
+  --text-muted: #496363;
+  --border: #b8cecc;
+  --notice-background: #f3f8f8;
+  --focus: #ffbf47;
+  --selected-background: #075c5b;
+  --selected-border: #075c5b;
+}
+
+/* Makes width calculations more predictable. */
+* {
+  box-sizing: border-box;
+}
+
+/* =========================
+   2. BASIC PAGE STYLES
+   ========================= */
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  padding: 24px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background:
+    radial-gradient(circle at 15% 10%, #d9efec 0, transparent 32rem),
+    var(--page-background);
+  color: var(--text-dark);
+
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.5;
+}
+
+/*
+  Any HTML element with the hidden attribute
+  should not appear on the page.
+*/
+[hidden] {
+  display: none !important;
+}
+
+/* =========================
+   3. MAIN PROJECT CARD
+   ========================= */
+
+.app {
+  width: 100%;
+  max-width: 680px;
+  padding: 28px;
+
+  background: var(--card-background);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+
+  box-shadow: 0 18px 50px rgba(20, 70, 68, 0.12);
+}
+
+.app-title {
+  margin: 0;
+
+  color: var(--primary-dark);
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+/* =========================
+   4. PROGRESS INDICATOR
+   ========================= */
+
+.progress-area {
+  margin-bottom: 28px;
+}
+
+.progress-label {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+
+  margin-bottom: 8px;
+
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.progress-track {
+  width: 100%;
+  height: 14px;
+
+  overflow: hidden;
+
+  background: #d3e7e6;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+}
+
+.progress-bar {
+  width: 20%;
+  height: 100%;
+
+  background: var(--primary);
+  border-radius: 999px;
+
+  transition: width 0.25s ease;
+}
+
+/* =========================
+   5. SCREEN CONTENT
+   ========================= */
+
+.screen h1,
+.screen h2 {
+  margin-top: 0;
+  margin-bottom: 12px;
+
+  color: var(--primary-dark);
+  line-height: 1.2;
+}
+
+.screen h1 {
+  font-size: clamp(1.8rem, 5vw, 2.4rem);
+}
+
+.screen h2 {
+  font-size: clamp(1.5rem, 4vw, 2rem);
+}
+
+.screen p {
+  margin-top: 0;
+}
+
+.eyebrow {
+  margin-bottom: 8px;
+  color: var(--primary);
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.time-note {
+  color: var(--text-muted);
+  font-size: 0.92rem;
+  text-align: center;
+}
+
+.intro-text {
+  font-size: 1.1rem;
+}
+
+.notice {
+  margin: 22px 0;
+  padding: 16px;
+
+  background: var(--notice-background);
+  border: 2px solid var(--primary);
+  border-radius: 10px;
+
+  font-weight: 700;
+}
+
+.question-help {
+  color: var(--text-muted);
+}
+
+.context-label {
+  margin-bottom: 6px;
+  color: var(--primary);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* =========================
+   6. BUTTONS
+   ========================= */
+
+.choice-list {
+  display: grid;
+  gap: 12px;
+
+  margin: 24px 0;
+}
+
+button {
+  min-height: 52px;
+  padding: 14px 18px;
+
+  border: 2px solid var(--primary-dark);
+  border-radius: 10px;
+
+  font: inherit;
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+/*
+  Gives keyboard users a clear outline
+  when they move through buttons using Tab.
+*/
+button:focus-visible {
+  outline: 4px solid var(--focus);
+  outline-offset: 3px;
+}
+
+button:disabled {
+  border-color: #a9b8b7;
+  background: #dce5e4;
+  color: #677776;
+  cursor: not-allowed;
+}
+
+.primary-button {
+  width: 100%;
+
+  background: var(--primary);
+  color: #ffffff;
+}
+
+.primary-button:hover {
+  background: var(--primary-hover);
+}
+
+.choice-button {
+  position: relative;
+  width: 100%;
+  min-height: 48px;
+  padding: 12px 52px 12px 46px;
+  background: #ffffff;
+  border-color: var(--border);
+  color: var(--text-dark);
+  font-weight: 600;
+  text-align: left;
+  transition: transform 0.15s ease, background-color 0.15s ease,
+    border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.choice-button:hover:not(:disabled) {
+  transform: translateY(-1px);
+  background: #edf7f6;
+  border-color: var(--primary);
+}
+
+.choice-button::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 16px;
+  width: 18px;
+  height: 18px;
+  transform: translateY(-50%);
+  background: #ffffff;
+  border: 2px solid var(--primary-dark);
+  border-radius: 50%;
+}
+
+/*
+  JavaScript changes aria-checked to true
+  when a choice is selected.
+*/
+.choice-button[aria-checked="true"] {
+  background: var(--selected-background);
+  border-color: var(--selected-border);
+  color: #ffffff;
+  box-shadow: 0 0 0 3px rgba(7, 92, 91, 0.18);
+}
+
+.choice-button[aria-checked="true"]::before {
+  background: var(--focus);
+  border-color: #ffffff;
+  box-shadow: inset 0 0 0 4px var(--primary-dark);
+}
+
+.choice-button[aria-checked="true"]::after {
+  content: "\2713";
+  position: absolute;
+  top: 50%;
+  right: 16px;
+  transform: translateY(-50%);
+  color: #ffffff;
+  font-size: 1.1rem;
+  font-weight: 800;
+}
+
+.secondary-button {
+  background: #ffffff;
+  color: var(--primary-dark);
+}
+
+.secondary-button:hover {
+  background: #edf7f6;
+}
+
+.navigation {
+  display: flex;
+  gap: 12px;
+
+  margin-top: 24px;
+}
+
+.navigation button {
+  flex: 1;
+}
+
+/* =========================
+   7. RESULT SCREEN
+   ========================= */
+
+.result-section {
+  margin: 18px 0;
+  padding: 16px;
+
+  background: var(--notice-background);
+  border-left: 5px solid var(--primary);
+  border-radius: 6px;
+}
+
+.result-section h3 {
+  margin-top: 0;
+  margin-bottom: 8px;
+
+  color: var(--primary-dark);
+}
+
+.result-highlight {
+  border: 1px solid #b9d8d5;
+  border-left-width: 5px;
+}
+
+.result-highlight[data-level="now"] {
+  background: #fff4e5;
+  border-color: #d77a18;
+}
+
+.result-highlight[data-level="soon"] {
+  background: #f4f7e8;
+  border-color: #80913a;
+}
+
+.result-highlight[data-level="share"] {
+  background: #eaf7f5;
+}
+
+.answer-summary {
+  margin: 0;
+  padding-left: 22px;
+}
+
+.answer-summary li {
+  margin-bottom: 8px;
+}
+
+.limit-reminder {
+  font-weight: 700;
+}
+
+/* =========================
+   8. SMALL-SCREEN LAYOUT
+   ========================= */
+
+@media (max-width: 520px) {
+  body {
+    padding: 12px;
+    align-items: flex-start;
+  }
+
+  .app {
+    padding: 20px;
+  }
+
+  .navigation {
+    flex-direction: column;
+  }
+
+  .navigation .secondary-button {
+    min-height: 44px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
